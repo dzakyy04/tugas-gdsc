@@ -30,6 +30,8 @@ Perform prediction from API
 
     python app.py
 
+The server will be running on port 5000, now you can try sending a request
+
 Example of JSON format for sending a request
 
     {
