@@ -35,3 +35,7 @@ labels = [neighbor['Label'] for neighbor in nearest_neighbors]
 most_common_label = pd.Series(labels).mode()[0]
 
 print(f"\nPrediction: {most_common_label}")
+
+print(f"\n{k_value} Nearest Neighbors:")
+for i, neighbor_info in enumerate(nearest_neighbors):
+    print(f"{i+1}. K = {neighbor_info['K']}, Distance: {neighbor_info['Distance']}, Label: {neighbor_info['Label']}")
