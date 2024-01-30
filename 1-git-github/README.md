@@ -8,11 +8,11 @@ Install python (I'm using python 3.10)
 ## How to run
 Clone the repository
 
-    https://github.com/dzakyy04/tugas-git-gdsc.git
+    https://github.com/dzakyy04/tugas-gdsc.git
 
 Switch to the repo folder
 
-    cd tugas-git-gdsc
+    cd tugas-git-gdsc/1-git-github
 
 Install all required packages
 

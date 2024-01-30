@@ -5,6 +5,7 @@ from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, r
 import pickle
 import matplotlib.pyplot as plt
 import seaborn as sns
+from tabulate import tabulate
 
 # Load dataset
 df = pd.read_csv('data_training.csv')
@@ -37,8 +38,6 @@ y_test = df_test[target]
 # Perform prediction for testing data
 y_pred = model.predict(X_test)
 
-print(y_pred)
-
 # Generate confusion matrix
 labels_order = ['S', 'M', 'L', 'XL', 'XXL']
 cm = confusion_matrix(y_test, y_pred, labels=labels_order)
@@ -46,12 +45,24 @@ plt.figure(figsize=(8,6))
 sns.heatmap(cm, annot=True, fmt='', cmap='Blues', xticklabels=labels_order, yticklabels=labels_order).set(xlabel='Prediction', ylabel='Actual')
 plt.show()
 
+# Calculate accuracy, precision, recall, and f1-score for each class
+precision = precision_score(y_test, y_pred, average=None, labels=labels_order)
+recall = recall_score(y_test, y_pred, average=None, labels=labels_order)
+f1 = f1_score(y_test, y_pred, average=None, labels=labels_order)
+
+metrics_table = []
+for i, label in enumerate(labels_order):
+    metrics_table.append([label, precision[i], recall[i], f1[i]])
+
+print(tabulate(metrics_table, headers=["Class", "Precision", "Recall", "F1 Score"], tablefmt="pretty"))
+
 # Calculate accuracy, precision, recall, and f1-score
 accuracy = accuracy_score(y_test, y_pred)
 precision = precision_score(y_test, y_pred, average='weighted')
 recall = recall_score(y_test, y_pred, average='weighted')
 f1 = f1_score(y_test, y_pred, average='weighted')
 
+print("\nOverall:")
 print(f"Accuracy: {accuracy}")
 print(f"Precision: {precision}")
 print(f"Recall: {recall}")
